@@ -86,12 +86,14 @@
 			
 			$('#left_bt').click(function(e) {
 				e.preventDefault();
-				number_model = number_model - 1;
-				alert(number_model);
+				if (number_model == 0) {} else {
+					number_model = number_model - 1;
+					preview_img();
+				}
 			});
 			
 			$('#right_bt').click(function(e) {
 				e.preventDefault();
 				number_model = number_model + 1;
-				alert(number_model);
+				preview_img();s
 			});

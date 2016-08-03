@@ -1,10 +1,46 @@
+			var objects = [];
+			
+			var t_loader = new THREE.TextureLoader();
+			var stone_mat = new THREE.MeshBasicMaterial( { map: t_loader .load('models/stone_dif.jpg')} );
+			
+			var stone = [{
+				path: 'models/stone.json',
+				mat: stone_mat,
+				name: 'stone',
+				scale: 0.3,
+				pos_x: 0,
+				pos_y: 0,
+				pos_z: 0,
+			}];	
+			
+			objects.push(stone)
+			
+						var stone2 = [{
+				path: 'models/stone.json',
+				mat: stone_mat,
+				name: 'stone',
+				scale: 0.0033,
+				pos_x: 0,
+				pos_y: -3,
+				pos_z: 0,
+			}];	
+			
+			objects.push(stone2)
+			
+			var loader;
+			var scene, camera, renderer;
 			var areaW = $('#dddd').width(); var areaH = $('#dddd').height();
-			var scene = new THREE.Scene();
-			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+		
 			
-			var container = document.getElementById( 'dddd' );
+			init();
+			obj_add(objects[0]);
 			
-			var renderer = new THREE.WebGLRenderer();
+			function init() {
+			scene = new THREE.Scene();
+			camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+			
+			container = document.getElementById( 'dddd' );
+			renderer = new THREE.WebGLRenderer();	
 			renderer.setSize( areaW, areaH );
 			renderer.setClearColor(new THREE.Color(0xebebe8));
 
@@ -15,15 +51,32 @@
 			var cube = new THREE.Mesh( geometry, material );
 			scene.add( cube );
 
-			camera.position.z = 5;
-
-			var render = function () {
-				requestAnimationFrame( render );
-
-				cube.rotation.x += 0.1;
-				cube.rotation.y += 0.1;
-
-				renderer.render(scene, camera);
-			};
+			camera.position.z = 20;
+			render();
+				
+			}
+			
+			
+			function obj_add(ht) {
+				loader = new THREE.JSONLoader();	
+				ht.forEach(function(o) {
+					loader.load(o.path,
+						function ( geometry, materials ) {
+							var object = new THREE.Mesh( geometry, o.mat );
+							object.scale.set(o.scale,o.scale,o.scale);
+							object.position.set(o.pos_x,o.pos_y,o.pos_z);
+							geometry.computeTangents();
+							object.name = o.name;
+							//remove_list.push(object.name);
+							scene.add(object);
+							render();
+						}
+					);
+				});
+			}
+	
+			function render() {
+				renderer.render( scene, camera );
+			}
 
 			render();

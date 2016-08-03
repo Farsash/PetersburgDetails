@@ -1,3 +1,6 @@
+			var number_model = 0; // Порядковый номер модели
+			
+			
 			var objects = [];
 			
 			var t_loader = new THREE.TextureLoader();
@@ -80,3 +83,15 @@
 			}
 
 			render();
+			
+			$('#left_bt').click(function(e) {
+				e.preventDefault();
+				number_model = number_model - 1;
+				alert(number_model);
+			});
+			
+			$('#right_bt').click(function(e) {
+				e.preventDefault();
+				number_model = number_model + 1;
+				alert(number_model);
+			});

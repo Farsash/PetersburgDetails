@@ -69,3 +69,19 @@ body {
 .preview a:hover {
 	color: #0a402b;
 }
+
+.btm {
+	position:absolute;
+	top:50%;
+	bottom:0;
+	z-index:80;
+}
+.bt_le {left:0;}
+.bt_ri {right:0;}
+
+.btm a {
+	display:block;
+	margin-top:-25px;
+	padding:25px 35px;
+	background-color:#0a402b;
+}

@@ -31,13 +31,20 @@ body {
 	text-decoration:none;
 }
 
+.WebGlpos {
+	width:100%;
+	height:800px;
+}
+
+.testd {
+	position:relative;
+	width:100%;
+	height:100%;
+	background:green;
+}
 .contener_pg {
 	background-color:#ebebe8;
-	position:fixed;
-	top:50px;
-	left:50px;
-	right:50px;
-	bottom:50px;
+	padding:50px;
 }
 
 .preview {
@@ -76,12 +83,26 @@ body {
 	bottom:0;
 	z-index:80;
 }
-.bt_le {left:0;}
-.bt_ri {right:0;}
+.bt_le {left:50px;}
+.bt_ri {right:50px;}
 
 .btm a {
 	display:block;
 	margin-top:-25px;
 	padding:25px 35px;
 	background-color:#0a402b;
+}
+
+
+.con_ful {
+	width:100vw;
+	height:100vh;
+	background:red;
+}
+
+.block_size {
+	width:100%;
+	height:100%;
+	background:green;
+	margin:50px;
 }

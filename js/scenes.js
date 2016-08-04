@@ -1,3 +1,5 @@
+			/*
+			
 			var number_model = 0; // Порядковый номер модели
 			
 			
@@ -97,3 +99,47 @@
 				number_model = number_model + 1;
 				preview_img();s
 			});
+			*/
+				if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
+				var container, loader;
+				var camera, controls, scene, renderer;
+				var scene = new THREE.Scene();
+				var areaW = $('#container').width(); var areaH = $('#container').height();
+
+				init();
+				render();
+				animate();
+				
+				function animate() {
+					requestAnimationFrame(animate);
+					renderer.render( scene, camera );
+				}
+				
+				function init() {
+					camera = new THREE.PerspectiveCamera( 60, areaW / areaH, 1, 80000 );
+					camera.position.y = 10;
+					camera.position.x = 10;
+					camera.lookAt(scene);
+					controls = new THREE.OrbitControls( camera );
+					controls.damping = 0.02;
+				
+
+					
+					var geometry = new THREE.PlaneGeometry( 20, 20, 10, 10 );
+					var material = new THREE.MeshBasicMaterial( {color: 0x00ffff, side: THREE.DoubleSide, wireframe: true, transparent: true} );
+					var plane = new THREE.Mesh( geometry, material );
+					plane.rotation.x = 90*(Math.PI/180)
+					scene.add( plane );
+				
+					renderer = new THREE.WebGLRenderer( { antialias: true } );
+					renderer.setClearColor( 0xff0000 );
+					renderer.setSize( areaW, areaH );
+					container = document.getElementById( 'container' );
+					container.appendChild( renderer.domElement );
+					render();
+				}	
+				
+				function render() {	
+					renderer.render( scene, camera );
+				}

@@ -101,6 +101,8 @@
 			});
 			*/
 				if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+				
+				var number_model = 0;
 
 				var container, loader;
 				var camera, controls, scene, renderer;
@@ -123,6 +125,7 @@
 					camera.lookAt(scene);
 					controls = new THREE.OrbitControls( camera );
 					controls.damping = 0.02;
+					controls.addEventListener( 'change', render );
 				
 
 					
@@ -133,13 +136,38 @@
 					scene.add( plane );
 				
 					renderer = new THREE.WebGLRenderer( { antialias: true } );
-					renderer.setClearColor( 0xff0000 );
+					renderer.setClearColor( 0xebebe8 );
+					renderer.setPixelRatio( window.devicePixelRatio );
 					renderer.setSize( areaW, areaH );
 					container = document.getElementById( 'container' );
 					container.appendChild( renderer.domElement );
+					window.addEventListener( 'resize', onWindowResize, false );
 					render();
 				}	
+				
+				function onWindowResize() {
+					camera.aspect = window.innerWidth / window.innerHeight;
+					camera.updateProjectionMatrix();
+
+					renderer.setSize( window.innerWidth, window.innerHeight );
+					render();
+				}
 				
 				function render() {	
 					renderer.render( scene, camera );
 				}
+				
+							
+				$('#left_bt').click(function(e) {
+					e.preventDefault();
+					if (number_model == 0) {} else {
+						number_model = number_model - 1;
+						preview_img();
+					}
+				});
+				
+				$('#right_bt').click(function(e) {
+					e.preventDefault();
+					number_model = number_model + 1;
+					preview_img();s
+				});

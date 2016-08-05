@@ -16,13 +16,31 @@
 				<li><a href="#">РЕШЁТКА</a> </li>
 			</ul>
 		</div>
-
-		<div class="con_ful">
-			<div class="block_size">
+		
+		<div id="full_bl">
+			<div  class="pg_bl" id="container">
+				<div class="preview">
+					<a href="#">Скачать</a>
+					<p id="prew"></p>
+				</div>
+				<div class="btm bt_le" id="left_bt"><a href="#"></a></div>
+				<div class="btm bt_ri"  id="right_bt"><a href="#"></a></div>
 			</div>
 		</div>
 		
 		<script src="js/jquery-3.1.0.min.js"></script>
+		<script>
+		function setHeiHeight() {
+			$('#full_bl').css({
+				height: $(window).outerHeight() - 100 + 'px'
+			});
+		}
+		setHeiHeight(); 
+		$(window).resize( setHeiHeight ); 
+		
+		</script>
+		
+		
 		<script src="js/three.js"></script>
 		<script src="js/OrbitControls.js"></script>
 		<script src="js/Detector.js"></script>
